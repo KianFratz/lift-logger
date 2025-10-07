@@ -1,4 +1,4 @@
-import { GalleryVerticalEnd } from "lucide-react"
+"use client"
 
 import { SignupForm } from "@/components/signup-form"
 
