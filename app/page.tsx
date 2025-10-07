@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,19 +11,8 @@ import { BarChart, Dumbbell, History } from "lucide-react";
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
-      <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <Dumbbell className="h-8 w-8 text-primary"></Dumbbell>
-          <h1 className="text-2xl font-bold">Lift Logger</h1>
-        </div>
-        <div>
-          <Button variant="ghost">Sign In </Button>
-          <Button className="ml-2">Get Started</Button>
-        </div>
-      </header>
-
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
+      <section className="container mx-auto px-4 py-40 text-center">
         <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
           Track Your Strength Journey
         </h2>
@@ -30,8 +20,10 @@ export default function Home() {
           The simplest way to log your workouts, track progress, and crush your
           fitness goals. Beautiful charts, detailed history, all in one place
         </p>
-        <div className="flex-gap-4 justify-center">
-          <Button>Start Logging Free</Button>
+        <div className="flex-gap-4 justify-center ">
+          <Button>
+            <Link href={"/signin"}>Start Logging Free</Link>
+          </Button>
         </div>
       </section>
 
@@ -72,18 +64,19 @@ export default function Home() {
       </section>
 
       {/* CTA section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-12">
         <Card className="bg-gradient-to-r from-primary/10 to-primary-glow/10 border-primary/20">
           <CardHeader>
             <CardTitle className="text-3xl">Ready to Get Stronger?</CardTitle>
             <CardDescription className="text-lg mb-4">
-              Join thousands of Lifters tracking their progress with Lift Logger.
+              Join thousands of Lifters tracking their progress with Lift
+              Logger.
             </CardDescription>
-            <Button size="lg" >Start Your Journey</Button>
+            <Button size="lg"><Link href={"/signup"}>Start Your Journey</Link></Button>
           </CardHeader>
         </Card>
       </section>
-      
+
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 border-t border-border mt-20">
         <div className="text-center text-muted-foreground">
