@@ -1,9 +1,18 @@
-import React from 'react'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-function page() {
+export default async function page() {
+  const supabase = createServerComponentClient({ cookies })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  if (!session) {
+    redirect("/login")
+  }
+
   return (
-    <div>Dashboard Page</div>
+    <div>
+      <h1>Welcome, {session.user.email}</h1>
+    </div>
   )
 }
-
-export default page

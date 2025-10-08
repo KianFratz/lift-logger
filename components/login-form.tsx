@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -18,7 +20,8 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export function LoginForm({
   className,
@@ -28,13 +31,15 @@ export function LoginForm({
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const createClient  = createClientComponentClient()
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await createClient.auth.signInWithPassword({
       email,
       password,
     });
@@ -45,7 +50,7 @@ export function LoginForm({
       setError(error.message);
     } else {
       // Redirect after successful login
-      window.location.href = "/dashboard";
+      router.push("/dashboard");
     }
   }
 
