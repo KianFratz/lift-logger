@@ -1,18 +1,24 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import AuthenticatedNavBar from "@/components/ui/authNavBar";
 
 export default async function page() {
-  const supabase = createServerComponentClient({ cookies })
-  const { data: { session } } = await supabase.auth.getSession()
+  const cookieStore = await cookies()
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect("/login")
+    redirect("/login");
   }
 
   return (
-    <div>
-      <h1>Welcome, {session.user.email}</h1>
+    <div className="min-h-screen bg-black pb-8">
+      {/* Header */}
+      <AuthenticatedNavBar />
     </div>
-  )
+  );
 }
