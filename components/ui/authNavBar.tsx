@@ -4,7 +4,7 @@ import React from "react";
 import { Dumbbell, LogOut } from "lucide-react";
 import { Button } from "./button";
 import { supabase } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 function AuthenticatedNavBar() {
   const router = useRouter();
